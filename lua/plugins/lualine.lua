@@ -4,18 +4,7 @@ return {
     local config = opts.sections
 
     -- rewrite lualine_z
-    config.lualine_z = {
-      { "encoding" },
-      {
-        "fileformat",
-        icons_enabled = true,
-        symbols = {
-          unix = "LF",
-          dos = "CRLF",
-          mac = "CR",
-        },
-      },
-    }
+    config.lualine_z = { { "encoding" }, { "fileformat" } }
 
     return opts
   end,
