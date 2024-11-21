@@ -3,3 +3,4 @@
 -- Add any additional options here
 
 vim.opt.listchars = "tab:▷ ,trail:·,nbsp:+"
+vim.opt.conceallevel = 0
