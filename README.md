@@ -5,7 +5,7 @@
 在Linux系统中默认都没有安装nvim，需要自行安装，官方的包管理器中的版本都太老了，最新的版本是0.10.x，nvim最新版要求至少glibc 2.31。（至少Ubuntu 20）
 由于这些 nvim 插件对版本很敏感，不同插件的版本之间可能会有很多问题，尽量都使用最新版。
 
-从 [nvim 仓库]([neovim/neovim: Vim-fork focused on extensibility and usability (github.com)](https://github.com/neovim/neovim)) 获取最新版的预编译的Tarball压缩包 [nvim-linux64.tar.gz](https://github.com/neovim/neovim/releases/download/v0.10.2/nvim-linux64.tar.gz) ，直接解压到本地就可以使用了，无须执行任何额外命令。
+从 [nvim 仓库](https://github.com/neovim/neovim) 获取最新版的预编译的Tarball压缩包 [nvim-linux64.tar.gz](https://github.com/neovim/neovim/releases/download/v0.10.2/nvim-linux64.tar.gz) ，直接解压到本地就可以使用了，无须执行任何额外命令。
 
 有两种配置方式：
 
@@ -19,6 +19,14 @@ cp -R * ~/.local/
 ```bash
 which nvim
 nvim --version
+```
+
+当前 nvim 版本信息
+```
+NVIM v0.11.4
+Build type: Release
+LuaJIT 2.1.1741730670
+Run "nvim -V1 -v" for more info
 ```
 
 ## nvim 配置目录
@@ -92,8 +100,67 @@ nvim 在文件管理器中：回车可以打开或关闭文件夹。a可以创�
 
 nvim 在文件管理器和主页面之间切换：ctrl+hjkl，（其实就是在windows之间切换）
 
-`<shift+h>` 切换是否展示hidden文件
+`<shift+h>` 切换是否展示hidden文件；
 `<shift+i>` 切换是否展示gitignore忽略的文件
+
+
+## LazyVim 配置记录
+
+记录一下目前基于 LazyVim 进行的配置更改。
+
+关闭 markdown 的语法检查（`lua/config/autocmds/lua`）
+```lua
+local function augroup(name)
+  return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+end
+
+-- wrap and check for spell in text filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("wrap_spell"),
+  pattern = { "gitcommit", "markdown" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = false -- default: true (underline)
+  end,
+})
+```
+
+在输入中文标点符号 `：` 时发出提示（`lua/config/keymaps.lua`）
+```lua
+vim.keymap.set("n", "：", function()
+  vim.notify("Please switch to English input before typing ':'", vim.log.levels.WARN)
+end, { noremap = true, silent = true })
+```
+
+一些选项修改（`lua/config/options.lua`）
+```lua
+local opt = vim.opt
+
+opt.listchars = "tab:▷ ,trail:·,nbsp:␣"
+
+opt.conceallevel = 0
+```
+
+其中 `opt.conceallevel = 0` 是为了避免 markdown 等文件自动隐藏一些字符。
+
+
+阻止自动补全的文本直接出现在当前行（`lua/plugins/cmp.lua`）
+```lua
+return {
+  {
+    "saghen/blink.cmp",
+    opts = {
+      completion = {
+        ghost_text = {
+          enabled = false,
+        },
+      },
+    },
+  },
+}
+```
+
+LazyVim 启用额外插件 aerial.nvim，为 markdown 文件提供目录大纲。
 
 
 ## 参考资料
