@@ -2,18 +2,21 @@
 
 ## nvim 安装
 
-在Linux系统中默认都没有安装nvim，需要自行安装，官方的包管理器中的版本都太老了，最新的版本是0.10.x，nvim最新版要求至少glibc 2.31。（至少Ubuntu 20）
-由于这些 nvim 插件对版本很敏感，不同插件的版本之间可能会有很多问题，尽量都使用最新版。
+在Linux系统中默认都没有安装nvim，需要自行安装，官方的包管理器中的版本都太老了，最新的版本是0.10.x，nvim最新版要求至少glibc 2.31（至少Ubuntu 20）。
 
-从 [nvim 仓库](https://github.com/neovim/neovim) 获取最新版的预编译的Tarball压缩包 [nvim-linux64.tar.gz](https://github.com/neovim/neovim/releases/download/v0.10.2/nvim-linux64.tar.gz) ，直接解压到本地就可以使用了，无须执行任何额外命令。
+由于 nvim 插件对版本都很敏感，不同插件的版本之间可能会有很多问题，尽量都使用最新版。
+
+从 [nvim 仓库](https://github.com/neovim/neovim) 获取最新版的预编译的压缩包 nvim-linux64.tar.gz，直接解压到本地就可以使用，无须执行任何额外命令。
 
 有两种配置方式：
 
-- 第一种方式是将对应的路径加到PATH中，保持 nvim 的目录独立性；
+- 第一种方式是将对应的路径加到 PATH 中，保持 nvim 的目录独立性；
 - 第二种方式是将解压后的子文件夹（包括`bin/`，`lib/`等）与`/usr/local/`或`~/.local/`位置下的对应子文件夹合并。
 ```bash
 cp -R * ~/.local/
 ```
+
+目前的做法是将其安装到 `~/opt`，并把对应的路径添加到 PATH。
 
 安装之后检查一下即可
 ```bash
@@ -59,12 +62,12 @@ nvim
 
 ## nvim API
 
-- vim.opt 现代接口（代替旧的vim.o，vim.wo，vim.bo）
-- vim.keymap.set （代替旧的vim.api.nvim_set_keymap）
-- vim.api.nvim_create_* 高级API，细颗粒度控制
-- vim.g 设置全局变量（唯一方式）
-- vim.fn 调用 vimscript 函数
-- vim.cmd 执行 vimscript 命令
+- `vim.opt` 现代接口（代替旧的 `vim.o`，`vim.wo`，`vim.bo`）
+- `vim.keymap.set`（代替旧的 `vim.api.nvim_set_keymap`）
+- `vim.api.nvim_create_*` 高级API，细颗粒度控制
+- `vim.g` 设置全局变量（唯一方式）
+- `vim.fn` 调用 vimscript 函数
+- `vim.cmd` 执行 vimscript 命令
 
 ## LazyVim 配置
 
@@ -98,7 +101,7 @@ nvim 打开/关闭文件浏览器：`<leader>e` 或者 `<leader>E`，两者打�
 
 nvim 在文件管理器中：回车可以打开或关闭文件夹。a可以创建文件或文件夹（要求/结尾）
 
-nvim 在文件管理器和主页面之间切换：ctrl+hjkl，（其实就是在windows之间切换）
+nvim 在文件管理器和主页面之间切换：`ctrl+hjkl`，（其实就是在windows之间切换）
 
 `<shift+h>` 切换是否展示hidden文件；
 `<shift+i>` 切换是否展示gitignore忽略的文件
