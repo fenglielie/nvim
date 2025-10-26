@@ -11,10 +11,14 @@
 有两种配置方式：
 
 - 第一种方式是将对应的路径加到 PATH 中，保持 nvim 的目录独立性；
+  ```bash
+  export PATH="$PATH:$HOME/opt/nvim-linux-x86_64/bin"
+  ```
+  
 - 第二种方式是将解压后的子文件夹（包括`bin/`，`lib/`等）与`/usr/local/`或`~/.local/`位置下的对应子文件夹合并。
-```bash
-cp -R * ~/.local/
-```
+  ```bash
+  cp -R * ~/.local/
+  ```
 
 目前的做法是将其安装到 `~/opt`，并把对应的路径添加到 PATH。
 
@@ -71,7 +75,7 @@ nvim
 
 ## LazyVim 配置
 
-LazyVim 是一套开箱即用的 nvim 配置方案，基于 lazy.vim 进行插件管理。
+[LazyVim](https://www.lazyvim.org/) 是一套开箱即用的 nvim 配置方案，基于 [lazy.vim](https://lazy.folke.io/) 进行插件管理。
 
 使用方式如下：
 
@@ -81,7 +85,7 @@ mv ~/.config/nvim ~/.config/nvim.bak
 mv ~/.local/share/nvim ~/.local/share/nvim.bak
 ```
 
-- 克隆 starter 仓库，并将其改为自己的独立仓库
+- 克隆 [LazyVim starter 仓库](https://github.com/LazyVim/starter)，并将其改为自己的独立仓库
 ```bash
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 
@@ -175,4 +179,5 @@ LazyVim 启用额外插件 aerial.nvim，为 markdown 文件提供目录大纲�
 - [从零开始配置 Neovim(Nvim)](https://martinlwx.github.io/zh-cn/config-neovim-from-scratch)
 - [【Vim】可能是B站最系统的Vim教程](https://www.bilibili.com/video/BV1s4421A7he/?share_source=copy_web&vd_source=4dd36b43694defc3f41604b0fa5aac75)
 - [用 neovim 写 markdown 是一种什么样的体验(含技巧)](https://yelog.org/2024/08/02/write-markdown-in-neovim-experience-and-tips/)
-
+- [LazyVim 配置全面指南](https://soda.dnggentle.art/%E4%B8%BA%E9%9B%84%E5%BF%83%E5%8B%83%E5%8B%83%E7%9A%84%E5%BC%80%E5%8F%91%E8%80%85%E8%80%8C%E6%89%93%E9%80%A0%E7%9A%84lazyvim%E6%95%99%E7%A8%8B/19-lazyvim-%E9%85%8D%E7%BD%AE%E5%85%A8%E9%9D%A2%E6%8C%87%E5%8D%97/)
+- [LazyVim for Ambitious Developers](https://lazyvim-ambitious-devs.phillips.codes/)
